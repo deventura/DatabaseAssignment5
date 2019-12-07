@@ -17,7 +17,7 @@ class App extends React.Component {
       this.setState({
         data: res.data.success
       });
-      console.log(res.data.success);
+      console.log(res.data);
     });
   }
 

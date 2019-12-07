@@ -4,6 +4,8 @@ const sqlite3 = require("sqlite3").verbose();
 const app = express();
 const axios = require("axios");
 var bodyParser = require("body-parser");
+var router = express.Router();
+const sample = require("./sample.js");
 
 app.use(bodyParser.json());
 
@@ -12,6 +14,8 @@ app.use(express.static(path.join(__dirname, "../build")));
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "../build", "index.html"));
 });
+
+//app.use("/database", sample);
 
 app.get("/", (req, res) => {
   console.log("get request to /");
@@ -49,6 +53,7 @@ app.get("/", (req, res) => {
     console.log("Close the database connection.");
   });
 
+  console.log(rowname);
   res.send({ success: true });
 });
 
