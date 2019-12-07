@@ -28,7 +28,7 @@
 
 const express = require('express');
 const app = express();
-
+const path = require("path");
 
 // use this library to interface with SQLite databases: https://github.com/mapbox/node-sqlite3
 const sqlite3 = require('sqlite3');
@@ -44,7 +44,8 @@ const db = new sqlite3.Database('./flowers2019.db');
 // will send the file static_files/cat.jpg to the user's web browser
 //
 // Learn more: http://expressjs.com/en/starter/static-files.html
-app.use(express.static('static_files'));
+//app.use(express.static('static_files'));
+app.use(express.static(path.join(__dirname, "../build")));
 
 
 // To learn more about server routing:

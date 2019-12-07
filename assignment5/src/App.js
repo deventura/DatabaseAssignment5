@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <div className="App">
-      <h1>Database Assignment 5</h1>
+      <h1>Flowers 101</h1>
       <Search />
       <DisplayTable/>
     </div>
