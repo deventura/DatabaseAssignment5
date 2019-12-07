@@ -1,8 +1,17 @@
 const express = require("express");
+const path = require("path");
 const sqlite3 = require("sqlite3").verbose();
 const app = express();
+const axios = require("axios");
+var bodyParser = require("body-parser");
 
-app.use(express.static("../publc/index.html"));
+app.use(bodyParser.json());
+
+app.use(express.static(path.join(__dirname, "../build")));
+
+app.get("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "../build", "index.html"));
+});
 
 app.get("/", (req, res) => {
   console.log("get request to /");
@@ -28,7 +37,7 @@ app.get("/", (req, res) => {
           console.error(err.message);
         }
         console.log(row.name + "\t" + row.person);
-        res.send(row);
+        const rowname = row.name;
       }
     );
   });
@@ -39,6 +48,8 @@ app.get("/", (req, res) => {
     }
     console.log("Close the database connection.");
   });
+
+  res.send({ success: true });
 });
 
 app.listen(3000, () => {
