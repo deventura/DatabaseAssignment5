@@ -26,14 +26,13 @@
 // and then start the server using:
 //   nodemon server.js
 
-const express = require('express');
+const express = require("express");
 const app = express();
-
+const path = require("path");
 
 // use this library to interface with SQLite databases: https://github.com/mapbox/node-sqlite3
-const sqlite3 = require('sqlite3');
-const db = new sqlite3.Database('./flowers2019.db');
-
+const sqlite3 = require("sqlite3");
+const db = new sqlite3.Database("./flowers2019.db");
 
 // put all of your static files (e.g., HTML, CSS, JS, JPG) in the static_files/
 // sub-directory, and the server will serve them from there. e.g.,:
@@ -44,22 +43,21 @@ const db = new sqlite3.Database('./flowers2019.db');
 // will send the file static_files/cat.jpg to the user's web browser
 //
 // Learn more: http://expressjs.com/en/starter/static-files.html
-app.use(express.static('static_files'));
-
+//app.use(express.static('static_files'));
+app.use(express.static(path.join(__dirname, "../build")));
 
 // To learn more about server routing:
 // Express - Hello world: http://expressjs.com/en/starter/hello-world.html
 // Express - basic routing: http://expressjs.com/en/starter/basic-routing.html
 // Express - routing: https://expressjs.com/en/guide/routing.html
 
-
 // GET a list of all usernames
 //
 // To test, open this URL in your browser:
 //   http://localhost:3000/users
-app.get('/sightings', (req, res) => {
+app.get("/sightings", (req, res) => {
   // db.all() fetches all results from an SQL query into the 'rows' variable:
-  db.all('SELECT Name as name FROM SIGHTINGS', (err, rows) => {
+  db.all("SELECT Name as name FROM SIGHTINGS", (err, rows) => {
     console.log(rows);
     const allsightings = rows.map(e => e.name);
     console.log(allsightings);
@@ -67,38 +65,36 @@ app.get('/sightings', (req, res) => {
   });
 });
 
-
 // POST data about a user to insert into the database
 // (note that this will insert duplicate entries!)
 //
 // To test, use the web frontend interface at:
 //   http://localhost:3000/petsapp.html
 // use this library to parse HTTP POST requests
-const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({extended: true})); // hook up with your app
-app.post('/sightings', (req, res) => {
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: true })); // hook up with your app
+app.post("/sightings", (req, res) => {
   console.log(req.body);
 
   db.run(
-    'INSERT INTO SIGHTINGS VALUES ($name, $person, $location,$sighted)',
+    "INSERT INTO SIGHTINGS VALUES ($name, $person, $location,$sighted)",
     // parameters to SQL query:
     {
       $name: req.body.name,
       $person: req.body.person,
       $location: req.body.location,
-      $sighted: req.body.sighted,
+      $sighted: req.body.sighted
     },
     // callback function to run when the query finishes:
-    (err) => {
+    err => {
       if (err) {
-        res.send({message: 'error in app.post(/users)'});
+        res.send({ message: "error in app.post(/users)" });
       } else {
-        res.send({message: 'successfully run app.post(/users)'});
+        res.send({ message: "successfully run app.post(/users)" });
       }
     }
   );
 });
-
 
 // GET profile data for a user
 //
@@ -106,12 +102,12 @@ app.post('/sightings', (req, res) => {
 //   http://localhost:3000/users/Philip
 //   http://localhost:3000/users/Carol
 //   http://localhost:3000/users/invalidusername
-app.get('/sightings/:userid', (req, res) => {
+app.get("/sightings/:userid", (req, res) => {
   const nameToLookup = req.params.userid; // matches ':userid' above
 
   // db.all() fetches all results from an SQL query into the 'rows' variable:
   db.all(
-    'SELECT * FROM SIGHTINGS WHERE name=$name',
+    "SELECT * FROM SIGHTINGS WHERE name=$name",
     // parameters to SQL query:
     {
       $name: nameToLookup
@@ -128,8 +124,7 @@ app.get('/sightings/:userid', (req, res) => {
   );
 });
 
-
 // start the server at URL: http://localhost:3000/
 app.listen(3000, () => {
-  console.log('Server started at http://localhost:3000/');
+  console.log("Server started at http://localhost:3000/");
 });
