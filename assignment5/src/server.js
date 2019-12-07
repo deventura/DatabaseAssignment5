@@ -45,6 +45,9 @@ const db = new sqlite3.Database("./flowers2019.db");
 // Learn more: http://expressjs.com/en/starter/static-files.html
 //app.use(express.static('static_files'));
 app.use(express.static(path.join(__dirname, "../build")));
+app.get("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "../build", "index.html"));
+});
 
 // To learn more about server routing:
 // Express - Hello world: http://expressjs.com/en/starter/hello-world.html
