@@ -1,10 +1,18 @@
 
 import React from "react";
+import { Component } from "react";
 import Table from 'react-bootstrap/Table';
 
 
 
 class displayTable extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      
+    };
+  }
+  
   //filterUpdate() {
   //Here you will need to update the value of the filter with the value from the textbox
 
@@ -44,3 +52,5 @@ class displayTable extends React.Component {
   }
 }
 export default displayTable;
+
+
