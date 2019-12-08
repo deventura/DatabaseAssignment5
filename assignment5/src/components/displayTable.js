@@ -62,7 +62,6 @@ class displayTable extends React.Component {
               <tbody>{flowerInfo}</tbody>
             </Table>
           </div>
-
           <div className="table2">
             <Table bordered hover size="sm">
               <thead class="thead-dark">
