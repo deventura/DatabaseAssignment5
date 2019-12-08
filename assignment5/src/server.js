@@ -62,12 +62,37 @@ app.use(cors());
 //   http://localhost:3000/users
 app.get("/sightings", (req, res) => {
   // db.all() fetches all results from an SQL query into the 'rows' variable:
-  db.all("SELECT Name as name FROM SIGHTINGS", (err, rows) => {
+  db.all("SELECT DISTINCT Name as name FROM SIGHTINGS", (err, rows) => {
     console.log(rows);
     const allsightings = rows.map(e => e.name);
     console.log(allsightings);
     res.send(allsightings);
   });
+});
+
+app.get("/sightings2", (req, res) => {
+  // db.all() fetches all results from an SQL query into the 'rows' variable:
+   const nameToLookup = req.params.userid; // matches ':userid' above
+
+  // db.all() fetches all results from an SQL query into the 'rows' variable:
+  db.all(
+   
+    "SELECT * FROM SIGHTINGS WHERE name = 'Death camas' ORDER BY sighted DESC LIMIT 10",
+    // parameters to SQL query:
+    {
+      $name: nameToLookup
+    },
+    // callback function to run when the query finishes:
+    (err, rows) => {
+      console.log("test");
+      console.log(rows);
+      if (rows.length > 0) {
+        res.send(rows);
+      } else {
+        res.send({}); // failed, so return an empty object instead of undefined
+      }
+    }
+  );
 });
 
 // POST data about a user to insert into the database

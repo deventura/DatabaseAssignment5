@@ -3,5 +3,13 @@
 }
 
 .table{
-	padding-left: 20px;
+	padding-left: 10px;
+	/*padding-right: 700px;*/
+	width: 50%;
+	
+}
+
+.table2{
+	/*padding-left: 600px;*/
+	padding-right: 10px;
 }
