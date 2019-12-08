@@ -9,13 +9,13 @@ class Update extends React.Component {
         <h3>Update Flower Information For:</h3>
         <h3>{currName}</h3>
         <input
-          style={{ width: 170, height: 35 }}
+          style={{ width: 250, height: 50 }}
           type="text"
           ref="genusInput"
           placeholder="genus"
         />
         <input
-          style={{ width: 170, height: 35 }}
+          style={{ width: 250, height: 50 }}
           type="text"
           ref="speciesInput"
           placeholder="species"
