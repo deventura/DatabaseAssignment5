@@ -6,7 +6,6 @@ import DisplayTable from "./components/displayTable";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import Insert from "./components/Insert";
-import Update from "./components/Update";
 
 class App extends React.Component {
   constructor(props) {
@@ -79,9 +78,6 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>Flowers 101</h1>
-
-
-
         <Search
           filterVal={this.props.filterText}
           filterUpdate={this.filterUpdate.bind(this)}
@@ -90,17 +86,13 @@ class App extends React.Component {
           currName={this.state.currName}
           insertSighting={this.insertSighting.bind(this)}
         />
-            
-
-          <Update/>
-
         <DisplayTable
-         data={this.state.data} 
-         data2={this.state.data2}
-        filter={this.state.filterText}
-        filterText={this.state.filterText}/>
-
-
+          data={this.state.data}
+          data2={this.state.data2}
+          filter={this.state.filterText}
+          filterText={this.state.filterText}
+          displaySightings={this.displaySightings.bind(this)}
+        />
       </div>
     );
   }

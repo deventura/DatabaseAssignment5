@@ -9,7 +9,7 @@ class Search extends React.Component {
     const {filterVal, filterUpdate} = this.props
     return (
       <form>
-        <input style={{width: 250, height: 40}} type="text" ref= "filterInput" value= {filterVal} placeholder="Search Flowers.."
+        <input type="text" ref= "filterInput" value= {filterVal} placeholder="Search Flowers.."
          onChange={() => {
            filterUpdate(this.refs.filterInput.value) 
           }}
