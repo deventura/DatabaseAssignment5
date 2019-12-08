@@ -6,6 +6,7 @@ import DisplayTable from "./components/displayTable";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import Insert from "./components/Insert";
+import Update from "./components/Update";
 
 class App extends React.Component {
   constructor(props) {
@@ -86,6 +87,7 @@ class App extends React.Component {
           currName={this.state.currName}
           insertSighting={this.insertSighting.bind(this)}
         />
+        <Update/>
         <DisplayTable
           data={this.state.data}
           data2={this.state.data2}

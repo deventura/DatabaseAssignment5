@@ -25,7 +25,7 @@ class Insert extends React.Component {
           ref="sightedInput"
           placeholder="sighted"
         />
-        <button
+        <button class="btn btn-dark"
           onClick={e => {
             insertSighting(
               currName,
