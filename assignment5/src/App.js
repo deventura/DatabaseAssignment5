@@ -14,7 +14,8 @@ class App extends React.Component {
     this.state = {
       data: [],
       data2: [],
-      filterText: ""
+      filterText: "",
+      currName: ""
     };
   }
 
@@ -37,7 +38,8 @@ class App extends React.Component {
     axios.get("/sightings2").then(res => {
       console.log("in axi get call");
       this.setState({
-        data2: res.data
+        data2: res.data,
+        currName: res.data[0].NAME
       });
       console.log(res.data);
     });
@@ -49,9 +51,28 @@ class App extends React.Component {
     axios.post("/sightings3", { flower: name }).then(res => {
       console.log(res.data);
       this.setState({
-        data2: res.data
+        data2: res.data,
+        currName: res.data[0].NAME
       });
     });
+  }
+
+  insertSighting(name, person, location, sighted) {
+    console.log("inserting sighting function hit");
+    console.log(name);
+    console.log(person);
+    console.log(location);
+    console.log(sighted);
+    axios
+      .post("/sightings4", {
+        name: name,
+        person: person,
+        location: location,
+        sighted: sighted
+      })
+      .then(res => {
+        console.log(res.data);
+      });
   }
 
   render() {
@@ -59,19 +80,19 @@ class App extends React.Component {
       <div className="App">
         <h1>Flowers 101</h1>
 
-        
-         <Search 
-           filterVal={this.props.filterText}
-          filterUpdate={this.filterUpdate.bind(this)} />
-        
-          <Insert 
+
+
+        <Search
           filterVal={this.props.filterText}
-          filterUpdate={this.filterUpdate.bind(this)}/>
-
-
+          filterUpdate={this.filterUpdate.bind(this)}
+        />
+        <Insert
+          currName={this.state.currName}
+          insertSighting={this.insertSighting.bind(this)}
+        />
+            
 
           <Update/>
-         
 
         <DisplayTable
          data={this.state.data} 
