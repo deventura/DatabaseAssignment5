@@ -77,7 +77,9 @@ class App extends React.Component {
          data={this.state.data} 
          data2={this.state.data2}
         filter={this.state.filterText}
-        filterText={this.state.filterText}/>
+        filterText={this.state.filterText}
+         displaySightings={this.displaySightings.bind(this)}
+        />
 
 
       </div>
