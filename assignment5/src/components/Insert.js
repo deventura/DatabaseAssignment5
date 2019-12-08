@@ -1,31 +1,43 @@
 import React from "react";
 
 class Insert extends React.Component {
-  //filterUpdate() {
-  //Here you will need to update the value of the filter with the value from the textbox
-
-  //	}
-
   render() {
-    
+    const { currName, insertSighting } = this.props;
     return (
-    
       <form>
-      <h4>Insert New Sighting</h4>
-        <input style={{width: 185, height: 35}} type="text" placeholder="name"
-        
-         />
-         <input style={{width: 185, height: 35}} type="text"  placeholder="person"
-         
-         />
-         <input style={{width: 185, height: 35}} type="text"  placeholder="location"
-         
-         />
-         <input style={{width: 185, height: 35}} type="text"  placeholder="sighted"
-        
-         />
-        
-      <button class="btn btn-dark">Insert</button>
+        <h2>Insert Sighting For: </h2>
+        <h3>{currName}</h3>
+        <input
+          style={{width: 185, height: 35}}
+          type="text"
+          ref="personInput"
+          placeholder="person"
+        />
+        <input
+          style={{width: 185, height: 35}}
+          type="text"
+          ref="locationInput"
+          placeholder="location"
+        />
+        <input
+          style={{width: 185, height: 35}}
+          type="text"
+          ref="sightedInput"
+          placeholder="sighted"
+        />
+        <button class="btn btn-dark"
+          onClick={e => {
+            insertSighting(
+              currName,
+              this.refs.personInput.value,
+              this.refs.locationInput.value,
+              this.refs.sightedInput.value
+            );
+            e.preventDefault();
+          }}
+        >
+          Submit
+        </button>
       </form>
     );
   }
