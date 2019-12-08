@@ -1,4 +1,3 @@
-
 import React from "react";
 
 class Update extends React.Component {
@@ -6,7 +5,7 @@ class Update extends React.Component {
     const { currName, updateFlower } = this.props;
     return (
       <form>
-        <h3>Update Flower Information For:</h3>
+        <h2>Update Flower Information For:</h2>
         <h3>{currName}</h3>
         <input
           style={{ width: 170, height: 35 }}
@@ -39,4 +38,3 @@ class Update extends React.Component {
   }
 }
 export default Update;
-
