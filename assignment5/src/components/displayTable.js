@@ -4,26 +4,64 @@ import Table from "react-bootstrap/Table";
 
 class displayTable extends React.Component {
   render() {
-    const { data } = this.props;
+    const { data, filterText, data2 } = this.props;
+    
 
-    const flowernames = data.map(names => {
+    const flowernames = data
+
+    .filter(names => names.toLowerCase().includes(filterText.toLowerCase()))
+    .map(names => {
       return (
         <tr>
           <td>{names}</td>
         </tr>
       );
-    });
+    })
+
+const sightings = data2
+
+    .map(sightings => {
+      return (
+        <tr>
+          <td>{sightings.PERSON}</td>
+          <td>{sightings.LOCATION}</td>
+          <td>{sightings.SIGHTED}</td>
+        </tr>
+      );
+    })
+
+
+    ;
 
     return (
-      <div>
-        <Table striped bordered hover size="sm">
-          <thead>
+      <div class="row">
+      <div class="col">
+      <div className="table">
+        <Table bordered hover size="sm">
+          <thead class="thead-dark">
             <tr>
               <th>Flower Name</th>
             </tr>
           </thead>
           <tbody>{flowernames}</tbody>
         </Table>
+      </div>
+      </div>
+      <div class="col">
+      <div className="table2">
+        <Table bordered hover size="sm">
+          <thead class="thead-dark">
+            <tr>
+              <th>Person</th>
+               <th>Location</th>
+                <th>Sighted</th>
+            </tr>
+          </thead>
+          <tbody>{sightings}</tbody>
+          
+        </Table>
+      </div>
+      </div>
       </div>
     );
   }
