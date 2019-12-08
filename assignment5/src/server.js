@@ -96,6 +96,55 @@ app.get("/sightings2", (req, res) => {
     }
   );
 });
+
+app.get("/sightings6", (req, res) => {
+  // db.all() fetches all results from an SQL query into the 'rows' variable:
+  const nameToLookup = req.params.userid; // matches ':userid' above
+
+  // db.all() fetches all results from an SQL query into the 'rows' variable:
+  db.all(
+    "SELECT genus, species FROM FLOWERS WHERE comname = 'Death camas'",
+    // parameters to SQL query:
+    {
+      $name: nameToLookup
+    },
+    // callback function to run when the query finishes:
+    (err, rows) => {
+      console.log("/sightings6");
+      console.log(rows);
+      if (rows.length > 0) {
+        res.send(rows);
+      } else {
+        res.send({}); // failed, so return an empty object instead of undefined
+      }
+    }
+  );
+});
+
+app.post("/sightings7", (req, res) => {
+  // db.all() fetches all results from an SQL query into the 'rows' variable:
+  const nameToLookup = req.body.flower; // matches ':userid' above
+
+  // db.all() fetches all results from an SQL query into the 'rows' variable:
+  db.all(
+    "SELECT genus, species FROM FLOWERS WHERE comname = $name",
+    // parameters to SQL query:
+    {
+      $name: nameToLookup
+    },
+    // callback function to run when the query finishes:
+    (err, rows) => {
+      console.log("/sightings7");
+      console.log(rows);
+      if (rows.length > 0) {
+        res.send(rows);
+      } else {
+        res.send({}); // failed, so return an empty object instead of undefined
+      }
+    }
+  );
+});
+
 app.post("/sightings3", (req, res) => {
   // db.all() fetches all results from an SQL query into the 'rows' variable:
   const nameToLookup = req.body.flower; // matches ':userid' above
@@ -146,6 +195,28 @@ app.post("/sightings4", (req, res) => {
         res.send({ message: "error in app.post(/users)" });
       } else {
         res.send({ message: "successfully run app.post(/users)" });
+      }
+    }
+  );
+});
+
+app.post("/sightings5", (req, res) => {
+  console.log("post request in /sightings5");
+  console.log(req.body);
+  db.run(
+    "UPDATE FLOWERS SET genus = $genus, species = $species WHERE comname = $comname",
+    // parameters to SQL query:
+    {
+      $comname: req.body.comname,
+      $genus: req.body.genus,
+      $species: req.body.species
+    },
+    // callback function to run when the query finishes:
+    err => {
+      if (err) {
+        res.send({ message: "error in app.post(/users)" });
+      } else {
+        res.send({ message: "successfully run app.post(/sightings5)" });
       }
     }
   );
