@@ -4,7 +4,7 @@ import Table from "react-bootstrap/Table";
 
 class displayTable extends React.Component {
   render() {
-    const { data, filterText, data2, displaySightings } = this.props;
+    const { data, filterText, data2, displaySightings, data3 } = this.props;
 
     const flowernames = data
 
@@ -27,8 +27,16 @@ class displayTable extends React.Component {
       );
     });
 
+    const flowerInfo = data3.map(info => {
+      return (
+        <tr>
+          <td>{info.GENUS}</td>
+          <td>{info.SPECIES}</td>
+        </tr>
+      );
+    });
+
     return (
-      
       <div class="row">
         <div class="col">
           <div className="table">
@@ -43,16 +51,15 @@ class displayTable extends React.Component {
           </div>
         </div>
         <div class="col">
-        <div className="table3">
+          <div className="table3">
             <Table bordered hover size="sm">
               <thead class="thead-dark">
                 <tr>
-                  <th>Person</th>
-                  <th>Location</th>
-                  <th>Sighted</th>
+                  <th>Genus</th>
+                  <th>Species</th>
                 </tr>
               </thead>
-              <tbody>{sightings}</tbody>
+              <tbody>{flowerInfo}</tbody>
             </Table>
           </div>
           <div className="table2">

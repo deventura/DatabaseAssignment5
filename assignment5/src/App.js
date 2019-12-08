@@ -15,6 +15,7 @@ class App extends React.Component {
     this.state = {
       data: [],
       data2: [],
+      data3: [],
       filterText: "",
       currName: ""
     };
@@ -44,6 +45,14 @@ class App extends React.Component {
       });
       console.log(res.data);
     });
+
+    axios.get("/sightings6").then(res => {
+      console.log("in axioss get call");
+      this.setState({
+        data3: res.data
+      });
+      console.log(res.data);
+    });
   }
 
   displaySightings(name) {
@@ -54,6 +63,12 @@ class App extends React.Component {
       this.setState({
         data2: res.data,
         currName: res.data[0].NAME
+      });
+    });
+    axios.post("/sightings7", { flower: name }).then(res => {
+      console.log(res.data);
+      this.setState({
+        data3: res.data
       });
     });
   }
@@ -76,6 +91,21 @@ class App extends React.Component {
       });
   }
 
+  updateFlower(comname, genus, species) {
+    console.log("update flower function hit");
+    console.log(comname);
+    console.log(genus);
+    console.log(species);
+    axios
+      .post("/sightings5", {
+        comname: comname,
+        genus: genus,
+        species: species
+      })
+      .then(res => {
+        console.log(res.data);
+      });
+  }
   render() {
     return (
       <div className="App">
@@ -94,13 +124,17 @@ class App extends React.Component {
           currName={this.state.currName}
           insertSighting={this.insertSighting.bind(this)}
         />
-        <Update/>
+        <Update
+          currName={this.state.currName}
+          updateFlower={this.updateFlower.bind(this)}
+        />
         <DisplayTable
           data={this.state.data}
           data2={this.state.data2}
           filter={this.state.filterText}
           filterText={this.state.filterText}
           displaySightings={this.displaySightings.bind(this)}
+          data3={this.state.data3}
         />
       </div>
     );
