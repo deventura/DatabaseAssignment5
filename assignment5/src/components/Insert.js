@@ -11,21 +11,21 @@ class Insert extends React.Component {
     return (
     
       <form>
-      <h2>Insert</h2>
-        <input style={{width: 250, height: 50}} type="text" placeholder="name"
+      <h4>Insert New Sighting</h4>
+        <input style={{width: 185, height: 35}} type="text" placeholder="name"
         
          />
-         <input style={{width: 250, height: 50}} type="text"  placeholder="person"
+         <input style={{width: 185, height: 35}} type="text"  placeholder="person"
          
          />
-         <input style={{width: 250, height: 50}} type="text"  placeholder="location"
+         <input style={{width: 185, height: 35}} type="text"  placeholder="location"
          
          />
-         <input style={{width: 250, height: 50}} type="text"  placeholder="sighted"
+         <input style={{width: 185, height: 35}} type="text"  placeholder="sighted"
         
          />
         
-      <button >Submit</button>
+      <button class="btn btn-dark">Insert</button>
       </form>
     );
   }
