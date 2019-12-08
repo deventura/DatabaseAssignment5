@@ -127,7 +127,8 @@ app.post("/sightings3", (req, res) => {
 //   http://localhost:3000/petsapp.html
 // use this library to parse HTTP POST requests
 
-app.post("/sightings", (req, res) => {
+app.post("/sightings4", (req, res) => {
+  console.log("post request in /sightings4");
   console.log(req.body);
 
   db.run(
