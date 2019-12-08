@@ -29,6 +29,7 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+var cors = require("cors");
 
 // use this library to interface with SQLite databases: https://github.com/mapbox/node-sqlite3
 const sqlite3 = require("sqlite3");
@@ -45,10 +46,11 @@ const db = new sqlite3.Database("./flowers2019.db");
 // Learn more: http://expressjs.com/en/starter/static-files.html
 //app.use(express.static('static_files'));
 app.use(express.static(path.join(__dirname, "../build")));
-app.get("*", function(req, res) {
+/*app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "../build", "index.html"));
-});
+});*/
 
+app.use(cors());
 // To learn more about server routing:
 // Express - Hello world: http://expressjs.com/en/starter/hello-world.html
 // Express - basic routing: http://expressjs.com/en/starter/basic-routing.html
@@ -128,6 +130,6 @@ app.get("/sightings/:userid", (req, res) => {
 });
 
 // start the server at URL: http://localhost:3000/
-app.listen(3000, () => {
-  console.log("Server started at http://localhost:3000/");
+app.listen(5000, () => {
+  console.log("Server started at http://localhost:5000/");
 });

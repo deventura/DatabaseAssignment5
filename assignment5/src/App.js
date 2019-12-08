@@ -27,9 +27,9 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <h1>Database Assignment 5</h1>
-        <div>{this.state.data}</div>
+        <h1>Flowers 101</h1>
         <Search />
+        <DisplayTable data={this.state.data} />
       </div>
     );
   }
