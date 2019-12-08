@@ -34,6 +34,7 @@ var cors = require("cors");
 // use this library to interface with SQLite databases: https://github.com/mapbox/node-sqlite3
 const sqlite3 = require("sqlite3");
 const db = new sqlite3.Database("./flowers2019.db");
+const bodyParser = require("body-parser");
 
 // put all of your static files (e.g., HTML, CSS, JS, JPG) in the static_files/
 // sub-directory, and the server will serve them from there. e.g.,:
@@ -51,6 +52,8 @@ app.use(express.static(path.join(__dirname, "../build")));
 });*/
 
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true })); // hook up with your app
+app.use(bodyParser.json());
 // To learn more about server routing:
 // Express - Hello world: http://expressjs.com/en/starter/hello-world.html
 // Express - basic routing: http://expressjs.com/en/starter/basic-routing.html
@@ -72,11 +75,10 @@ app.get("/sightings", (req, res) => {
 
 app.get("/sightings2", (req, res) => {
   // db.all() fetches all results from an SQL query into the 'rows' variable:
-   const nameToLookup = req.params.userid; // matches ':userid' above
+  const nameToLookup = req.params.userid; // matches ':userid' above
 
   // db.all() fetches all results from an SQL query into the 'rows' variable:
   db.all(
-   
     "SELECT * FROM SIGHTINGS WHERE name = 'Death camas' ORDER BY sighted DESC LIMIT 10",
     // parameters to SQL query:
     {
@@ -94,15 +96,37 @@ app.get("/sightings2", (req, res) => {
     }
   );
 });
+app.post("/sightings3", (req, res) => {
+  // db.all() fetches all results from an SQL query into the 'rows' variable:
+  const nameToLookup = req.body.flower; // matches ':userid' above
+  console.log("in sightings3", req.body.flower);
 
+  // db.all() fetches all results from an SQL query into the 'rows' variable:
+  db.all(
+    "SELECT * FROM SIGHTINGS WHERE name = $name ORDER BY sighted DESC LIMIT 10",
+    // parameters to SQL query:
+    {
+      $name: nameToLookup
+    },
+    // callback function to run when the query finishes:
+    (err, rows) => {
+      console.log("test");
+      console.log(rows);
+      if (rows.length > 0) {
+        res.send(rows);
+      } else {
+        res.send({}); // failed, so return an empty object instead of undefined
+      }
+    }
+  );
+});
 // POST data about a user to insert into the database
 // (note that this will insert duplicate entries!)
 //
 // To test, use the web frontend interface at:
 //   http://localhost:3000/petsapp.html
 // use this library to parse HTTP POST requests
-const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: true })); // hook up with your app
+
 app.post("/sightings", (req, res) => {
   console.log(req.body);
 
