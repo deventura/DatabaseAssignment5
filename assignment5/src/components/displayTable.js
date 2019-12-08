@@ -34,6 +34,7 @@ const sightings = data2
     ;
 
     return (
+      
       <div class="row">
       <div class="col">
       <div className="table">

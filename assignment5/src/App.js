@@ -5,6 +5,7 @@ import Search from "./components/Search";
 import DisplayTable from "./components/displayTable";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
+import Insert from "./components/Insert";
 
 class App extends React.Component {
   constructor(props) {
@@ -49,6 +50,9 @@ class App extends React.Component {
          <Search 
            filterVal={this.props.filterText}
           filterUpdate={this.filterUpdate.bind(this)} />
+          <Insert 
+          filterVal={this.props.filterText}
+          filterUpdate={this.filterUpdate.bind(this)}/>
         <DisplayTable
          data={this.state.data} 
          data2={this.state.data2}
