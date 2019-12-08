@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import Insert from "./components/Insert";
 import Update from "./components/Update";
+import flowerlogo from "./flowerlogo.jpg";
 
 class App extends React.Component {
   constructor(props) {
@@ -78,7 +79,13 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <h1>Flowers 101</h1>
+        <h1>Flowers 101 &nbsp;
+        <img
+            src={flowerlogo}
+            width={50}
+          />
+        </h1>
+        
         <Search
           filterVal={this.props.filterText}
           filterUpdate={this.filterUpdate.bind(this)}

@@ -11,7 +11,7 @@ class Update extends React.Component {
     return (
     
       <form>
-      <h4>Update Flower Information</h4>
+      <h2>Update Flower Information</h2>
         <input style={{width: 170, height: 35}} type="text" placeholder="genus"
         
          />

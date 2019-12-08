@@ -43,6 +43,18 @@ class displayTable extends React.Component {
           </div>
         </div>
         <div class="col">
+        <div className="table3">
+            <Table bordered hover size="sm">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Person</th>
+                  <th>Location</th>
+                  <th>Sighted</th>
+                </tr>
+              </thead>
+              <tbody>{sightings}</tbody>
+            </Table>
+          </div>
           <div className="table2">
             <Table bordered hover size="sm">
               <thead class="thead-dark">
