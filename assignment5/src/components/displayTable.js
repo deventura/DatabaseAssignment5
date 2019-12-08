@@ -28,6 +28,7 @@ class displayTable extends React.Component {
     });
 
     return (
+      
       <div class="row">
         <div class="col">
           <div className="table">
