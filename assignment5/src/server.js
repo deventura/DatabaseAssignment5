@@ -30,10 +30,14 @@ const express = require("express");
 const app = express();
 const path = require("path");
 var cors = require("cors");
+const bodyParser = require("body-parser");
 
 // use this library to interface with SQLite databases: https://github.com/mapbox/node-sqlite3
 const sqlite3 = require("sqlite3");
 const db = new sqlite3.Database("./flowers2019.db");
+
+app.use(bodyParser.urlencoded({ extended: true })); // hook up with your app
+app.use(bodyParser.json());
 
 // put all of your static files (e.g., HTML, CSS, JS, JPG) in the static_files/
 // sub-directory, and the server will serve them from there. e.g.,:
@@ -51,6 +55,7 @@ app.use(express.static(path.join(__dirname, "../build")));
 });*/
 
 app.use(cors());
+
 // To learn more about server routing:
 // Express - Hello world: http://expressjs.com/en/starter/hello-world.html
 // Express - basic routing: http://expressjs.com/en/starter/basic-routing.html
@@ -65,6 +70,7 @@ app.get("/sightings", (req, res) => {
   db.all("SELECT Name as name FROM SIGHTINGS", (err, rows) => {
     console.log(rows);
     const allsightings = rows.map(e => e.name);
+    console.log("above all sightings");
     console.log(allsightings);
     res.send(allsightings);
   });
@@ -76,8 +82,21 @@ app.get("/sightings", (req, res) => {
 // To test, use the web frontend interface at:
 //   http://localhost:3000/petsapp.html
 // use this library to parse HTTP POST requests
-const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: true })); // hook up with your app
+
+app.post("/sightings/name", (req, res) => {
+  console.log("got flowername from post request:", req.body.flower);
+  const str =
+    "SELECT * FROM SIGHTINGS WHERE name = '" +
+    req.body.flower +
+    "' ORDER BY sighted DESC LIMIT 10";
+  console.log(str);
+
+  db.all(str, (err, rows) => {
+    console.log(rows);
+  });
+  res.json(rows);
+});
+
 app.post("/sightings", (req, res) => {
   console.log(req.body);
 
