@@ -8,24 +8,24 @@ class Insert extends React.Component {
         <h2>Insert Sighting For: </h2>
         <h3>{currName}</h3>
         <input
-          style={{width: 185, height: 35}}
+          style={{ width: 250, height: 50 }}
           type="text"
           ref="personInput"
           placeholder="person"
         />
         <input
-          style={{width: 185, height: 35}}
+          style={{ width: 250, height: 50 }}
           type="text"
           ref="locationInput"
           placeholder="location"
         />
         <input
-          style={{width: 185, height: 35}}
+          style={{ width: 250, height: 50 }}
           type="text"
           ref="sightedInput"
           placeholder="sighted"
         />
-        <button class="btn btn-dark"
+        <button
           onClick={e => {
             insertSighting(
               currName,

@@ -14,15 +14,6 @@
 	padding-right: 10px;
 }
 
-.placeholder{
-	font-size: 10px;
-}
-
-.btn-primary{
-	background-color: black;
-}
-
-.column1{
-	float: right;
-	width: 35%;
+.input{
+	width: 10px;
 }
