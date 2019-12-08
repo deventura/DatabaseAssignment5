@@ -7,20 +7,21 @@ class Update extends React.Component {
   //	}
 
   render() {
-    
     return (
-    
       <form>
-      <h4>Update Flower Information</h4>
-        <input style={{width: 170, height: 35}} type="text" placeholder="genus"
-        
-         />
-         <input style={{width: 170, height: 35}} type="text"  placeholder="species"
-         
-         />
-        
-        
-      <button class="btn btn-dark">Update</button>
+        <h4>Update Flower Information</h4>
+        <input
+          style={{ width: 170, height: 35 }}
+          type="text"
+          placeholder="genus"
+        />
+        <input
+          style={{ width: 170, height: 35 }}
+          type="text"
+          placeholder="species"
+        />
+
+        <button class="btn btn-dark">Update</button>
       </form>
     );
   }
